@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Date With Me?</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      height: 100vh;
+      padding: 30px;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    h1, h2, h3, h4 {
+      text-shadow: 2px 2px 8px #ff4f7b;
+    }
+
+    button, input, select {
+      padding: 14px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    button {
+      background: #ff4f7b;
+      color: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+    }
+
+    #noBtn {
+      position: absolute;
+      background: #555;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.2);
+      padding: 30px;
+      border-radius: 25px;
+      backdrop-filter: blur(8px);
+      max-width: 450px;
+      z-index: 2;
+    }
+
+    img {
+      width: 180px;
+      border-radius: 20px;
+      margin: 15px;
+    }
+
+    .option {
+      display: block;
+      width: 260px;
+      margin: 12px auto;
+    }
+
+    #flower {
+      width: 180px;
+      cursor: pointer;
+      animation: pulseFlower 1.2s infinite;
+      display: block;
+      margin: 0 auto;
+    }
+
+    #flower:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes pulseFlower {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.18) rotate(8deg); }
+      100% { transform: scale(1); }
+    }
+
+    .tiny {
+      position: absolute;
+      font-size: 24px;
+      animation: floatAway 2.5s forwards;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes floatAway {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(1.8) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="page active" id="page1">
+    <div class="card">
+      <h2>Hello My Love, will you go on a date with me? ❤️</h2>
+      <img src="img1.gif" width="100">
+      <br>
+      <h3>I promise to only annoy you lil bit or alot, depends on my mood and how tormentable you looking ❤️</h3>
+      <button onclick="nextPage(2)">Yes 💕</button>
+      <button id="noBtn">No 😭</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+    <div class="card">
+      <h2>Good thing you didn’t say no...</h2>
+      <h2>My heart too fragile 🥺❤️</h2>
+      <h4>Plus I need my hugs Missssss 🥺</h4>
+      <img src="img2.gif" width="100">
+      <br>
+      <button onclick="nextPage(3)">Continue 💌</button>
+    </div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page" id="page3">
+    <div class="card">
+      <h1>I love youuuuuuuuuuuuuuuu Pretty Lady ❤️</h1>
+      <h4>Click the flower to see something cool (i think) 🌸</h4>
+
+      <div id="flower" onclick="burstFlowers()">
+        <img id="flower" src="img3.png" alt="Flower">
+      </div>
+
+      <br>
+      <button onclick="nextPage(4)">Next 💌</button>
+    </div>
+  </div>
+
+  <!-- FORM START -->
+  <form action="https://formspree.io/f/xkoedgpd" method="POST">
+
+    <!-- PAGE 4 -->
+    <div class="page" id="page4">
+      <div class="card">
+        <h2>BTW before I get distracted... choose a date you’re free 📅</h2>
+        <input type="date" name="date" required>
+        <br>
+        <button type="button" onclick="nextPage(5)">Next ❤️</button>
+      </div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page" id="page5">
+      <div class="card">
+        <h2>What would you like to do? 💕</h2>
+        <h2>Ahh begging you miss, no more shopping 🙏😭</h2>
+
+        <button type="button" class="option" onclick="chooseActivity('Watch a movie')">Watch a movie 🎬</button>
+        <button type="button" class="option" onclick="chooseActivity('Beach to relax')">Beach to relax 🏖️</button>
+        <button type="button" class="option" onclick="chooseActivity('Long drive')">Long drive 🚗</button>
+        <button type="button" class="option" onclick="chooseActivity('Shopping')">Shopping 🛍️</button>
+
+        <input type="hidden" name="activity" id="activity">
+      </div>
+    </div>
+
+    <!-- PAGE 6 -->
+    <div class="page" id="page6">
+      <div class="card">
+        <h2>What food do you want? 🍽️</h2>
+        <h2>Anytime you choose surprise me, we starving 👀</h2>
+
+        <select name="food" required>
+          <option value="">Choose food</option>
+          <option>Pizza</option>
+          <option>Chinese food</option>
+          <option>Chicken over rice</option>
+          <option>Corila</option>
+          <option>Balange</option>
+          <option>Ice cream / dessert</option>
+          <option>Surprise me</option>
+        </select>
+
+        <br>
+        <button type="submit">Send my answers ❤️</button>
+      </div>
+    </div>
+
+  </form>
+
+  <script>
+    function nextPage(pageNumber) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      document.getElementById('page' + pageNumber).classList.add('active');
+    }
+
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    noBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+
+    function chooseActivity(activity) {
+      document.getElementById("activity").value = activity;
+      nextPage(6);
+    }
+
+    function burstFlowers() {
+      const symbols = ["🌸", "🌺", "🌷", "💐", "❤️", "💕", "💖", "💘"];
+
+      for (let i = 0; i < 120; i++) {
+        const tiny = document.createElement("div");
+        tiny.classList.add("tiny");
+        tiny.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+
+        tiny.style.left = "50%";
+        tiny.style.top = "50%";
+
+        const x = (Math.random() - 0.5) * window.innerWidth + "px";
+        const y = (Math.random() - 0.5) * window.innerHeight + "px";
+
+        tiny.style.setProperty("--x", x);
+        tiny.style.setProperty("--y", y);
+
+        document.body.appendChild(tiny);
+
+        setTimeout(() => {
+          tiny.remove();
+        }, 2500);
+      }
+    }
+  </script>
+
+</body>
+</html>
